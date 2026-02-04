@@ -1,31 +1,35 @@
 const yesBtn = document.getElementById('yesBtn');
 const noBtn = document.getElementById('noBtn');
+const container = document.querySelector('.container');
+const topGif = document.getElementById('topGif');
 
-// Função para encolher o NO e aumentar o YES
+// Função para clicar no NO
 function clickNo() {
   // Diminuir o botão NO
-  const noStyle = window.getComputedStyle(noBtn);
-  let noSize = parseInt(noStyle.fontSize); // tamanho atual
-  if (noSize > 10) { // limita para não desaparecer completamente
+  let noSize = parseInt(window.getComputedStyle(noBtn).fontSize);
+  if (noSize > 10) {
     noSize -= 2;
     noBtn.style.fontSize = noSize + 'px';
-    noBtn.style.padding = (parseInt(noBtn.style.padding || 15) - 1) + 'px 30px';
+    noBtn.style.padding = (parseInt(noBtn.style.padding) - 1) + 'px 30px';
   }
 
   // Aumentar o botão YES
-  const yesStyle = window.getComputedStyle(yesBtn);
-  let yesSize = parseInt(yesStyle.fontSize);
-  if (yesSize < 200) { // limita o tamanho máximo
+  let yesSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+  if (yesSize < 200) {
     yesSize += 5;
     yesBtn.style.fontSize = yesSize + 'px';
-    yesBtn.style.padding = (parseInt(yesBtn.style.padding || 15) + 2) + 'px 30px';
+    yesBtn.style.padding = (parseInt(yesBtn.style.padding) + 2) + 'px 30px';
   }
 }
 
-// Quando clicar no NO
 noBtn.addEventListener('click', clickNo);
 
-// Quando clicar no YES
+// Função para clicar no YES
 yesBtn.addEventListener('click', () => {
-  alert("Yay! Você aceitou ser meu Valentine! 💖");
+  // Limpar a tela
+  container.innerHTML = `
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Love GIF">
+    <h1>Yay! You are my Valentine! 💖</h1>
+  `;
+  container.style.flexDirection = 'column';
 });
